@@ -29,6 +29,8 @@ func typeTr(t reflect.Type) string {
 	}
 
 	switch t.Name() {
+	case "bool":
+		return "Uint8"
 	case "int":
 		return "Int32"
 	default:
