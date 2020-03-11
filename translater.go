@@ -14,7 +14,7 @@ func Columnize(t reflect.Type) string {
 	for i := 0; i < t.NumField(); i++ {
 		fieldsStr = append(fieldsStr, columnize(t.Field(i)))
 	}
-	return fmt.Sprintf(s, t.Name(), strings.Join(fieldsStr, ",\n"))
+	return fmt.Sprintf(s, t.Name(), strings.Join(fieldsStr, "\n"))
 }
 
 func columnize(f reflect.StructField) string {
