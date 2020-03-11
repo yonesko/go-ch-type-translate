@@ -6,6 +6,29 @@ import (
 	"strings"
 )
 
+func Columnize(t reflect.Type) string {
+	s := "type %s struct {\n%s\n}"
+	var fieldsStr []string
+	for i := 0; i < t.NumField(); i++ {
+		fieldsStr = append(fieldsStr, columnize(t.Field(i)))
+	}
+	return fmt.Sprintf(s, t.Name(), strings.Join(fieldsStr, ",\n"))
+}
+
+func columnize(f reflect.StructField) string {
+	if f.Type.Kind() == reflect.Slice || f.Type.Kind() == reflect.Array {
+		t := f.Type.Elem()
+		var fieldsStr []string
+		for i := 0; i < t.NumField(); i++ {
+			fi := t.Field(i)
+			fieldsStr = append(fieldsStr,
+				fmt.Sprintf("%s.%s []%s %s", f.Name, fi.Name, fi.Type, fi.Tag))
+		}
+		return strings.Join(fieldsStr, "\n")
+	}
+	return fmt.Sprintf("%s %s %s", f.Name, f.Type, f.Tag)
+}
+
 func TranslateForCreateTable(t reflect.Type) string {
 	var fieldsStr []string
 	for i := 0; i < t.NumField(); i++ {
