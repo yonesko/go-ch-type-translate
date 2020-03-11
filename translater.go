@@ -22,7 +22,7 @@ func columnize(f reflect.StructField) string {
 		for i := 0; i < t.NumField(); i++ {
 			fi := t.Field(i)
 			fieldsStr = append(fieldsStr,
-				fmt.Sprintf("%s.%s []%s %s", f.Name, fi.Name, fi.Type, fi.Tag))
+				fmt.Sprintf("%s%s []%s `%s`", f.Name, fi.Name, fi.Type, fi.Tag))
 		}
 		return strings.Join(fieldsStr, "\n")
 	}
