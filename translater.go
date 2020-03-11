@@ -16,6 +16,10 @@ func translate(t reflect.Type) string {
 }
 
 func typeTr(t reflect.Type) string {
+	if t.Kind() == reflect.Slice || t.Kind() == reflect.Array {
+		return fmt.Sprintf("Nested (%s)", translate(t.Elem()))
+	}
+
 	switch t.Name() {
 	case "int":
 		return "Int32"

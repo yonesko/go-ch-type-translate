@@ -7,9 +7,14 @@ import (
 )
 
 func Test(t *testing.T) {
+	type ElemExample struct {
+		CompanyInn string `json:"companyInn"`
+		CompanyKPP string `json:"companyKPP"`
+	}
 	type Example struct {
-		Name int    `json:"name"`
-		F4   string `json:"f_4"`
+		Name  int           `json:"name"`
+		F4    string        `json:"f_4"`
+		Elems []ElemExample `json:"elems"`
 	}
 
 	fmt.Println(translate(reflect.TypeOf(Example{})))
