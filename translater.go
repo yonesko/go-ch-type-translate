@@ -10,9 +10,17 @@ func translate(t reflect.Type) string {
 	var fieldsStr []string
 	for i := 0; i < t.NumField(); i++ {
 		f := t.Field(i)
-		fieldsStr = append(fieldsStr, fmt.Sprintf("%s %s", f.Tag.Get("json"), typeTr(f.Type)))
+		fieldsStr = append(fieldsStr, fmt.Sprintf("%s %s", fieldName(f), typeTr(f.Type)))
 	}
 	return strings.Join(fieldsStr, ",\n")
+}
+
+func fieldName(f reflect.StructField) string {
+	name := f.Tag.Get("json")
+	if name == "" {
+		name = f.Name
+	}
+	return name
 }
 
 func typeTr(t reflect.Type) string {
