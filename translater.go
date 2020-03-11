@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func Translate(t reflect.Type) string {
+func TranslateForCreateTable(t reflect.Type) string {
 	var fieldsStr []string
 	for i := 0; i < t.NumField(); i++ {
 		f := t.Field(i)
@@ -25,7 +25,7 @@ func fieldName(f reflect.StructField) string {
 
 func typeTr(t reflect.Type) string {
 	if t.Kind() == reflect.Slice || t.Kind() == reflect.Array {
-		return fmt.Sprintf("Nested (%s)", Translate(t.Elem()))
+		return fmt.Sprintf("Nested (%s)", TranslateForCreateTable(t.Elem()))
 	}
 
 	switch t.Name() {

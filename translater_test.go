@@ -17,5 +17,5 @@ func Test(t *testing.T) {
 		Elems []ElemExample `json:"elems"`
 	}
 
-	fmt.Println(Translate(reflect.TypeOf(Example{})))
+	fmt.Println(TranslateForCreateTable(reflect.TypeOf(Example{})))
 }
