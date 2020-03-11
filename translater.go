@@ -6,6 +6,8 @@ import (
 	"strings"
 )
 
+//Columnize splits slice and array types for Nested type json requirements insert in Clickhouse\
+//https://clickhouse.tech/docs/ru/interfaces/formats/#jsoneachrow-nested
 func Columnize(t reflect.Type) string {
 	s := "type %s struct {\n%s\n}"
 	var fieldsStr []string
