@@ -26,7 +26,7 @@ func columnize(f reflect.StructField) string {
 		}
 		return strings.Join(fieldsStr, "\n")
 	}
-	return fmt.Sprintf("%s %s %s", f.Name, f.Type, f.Tag)
+	return fmt.Sprintf("%s %s `%s`", f.Name, f.Type, f.Tag)
 }
 
 func TranslateForCreateTable(t reflect.Type) string {
